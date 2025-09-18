@@ -7,7 +7,7 @@ import QuartzCore
  * Custom UIView that renders Siri-style wave animation
  * Replicates the iOS9+ wave effect from SiriWave.js
  */
-class SiriWaveView: UIView {
+public class SiriWaveView: UIView {
 
     // MARK: - 属性 / Properties
     /// 显示链接：用于60fps动画循环
@@ -44,13 +44,13 @@ class SiriWaveView: UIView {
     private let supportLineColor = UIColor.white.withAlphaComponent(0.5)
 
     // MARK: - 初始化 / Initialization
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         curveManager = WaveCurveManager()
         super.init(frame: frame)
         setup()
     }
 
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         curveManager = WaveCurveManager()
         super.init(coder: coder)
         setup()
@@ -69,7 +69,7 @@ class SiriWaveView: UIView {
     }
 
     // MARK: - 布局 / Layout
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         updateDimensions()
     }
@@ -88,7 +88,7 @@ class SiriWaveView: UIView {
      * 创建CADisplayLink实现60fps的平滑动画
      * Start the wave animation
      */
-    func start() {
+    public func start() {
         guard !isAnimating else { return }
 
         isAnimating = true
@@ -104,7 +104,7 @@ class SiriWaveView: UIView {
      * 清理显示链接并重置状态
      * Stop the wave animation
      */
-    func stop() {
+    public func stop() {
         guard isAnimating else { return }
 
         isAnimating = false
@@ -122,7 +122,7 @@ class SiriWaveView: UIView {
      * 设置动画振幅（支持平滑插值过渡）
      * Set animation amplitude with interpolation
      */
-    func setAmplitude(_ amplitude: Double) {
+    public func setAmplitude(_ amplitude: Double) {
         targetAmplitude = max(0, amplitude)
     }
 
@@ -130,7 +130,7 @@ class SiriWaveView: UIView {
      * 设置动画速度（支持平滑插值过渡）
      * Set animation speed with interpolation
      */
-    func setSpeed(_ speed: Double) {
+    public func setSpeed(_ speed: Double) {
         targetSpeed = max(0, speed)
     }
 
@@ -184,7 +184,7 @@ class SiriWaveView: UIView {
      * 主绘制函数
      * 设置绘图上下文并调用波形绘制
      */
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
         // 清除上下文，设置透明背景
@@ -372,7 +372,8 @@ class SiriWaveView: UIView {
 
     // MARK: - 清理 / Cleanup
     deinit {
-        stop()
+        // Swift 6 并发安全：deinit 为 nonisolated，避免直接访问 @MainActor 属性
+        // 类销毁时 CADisplayLink 会自动被释放
     }
 }
 
@@ -383,7 +384,7 @@ extension SiriWaveView {
      * 便捷方法：创建并配置波形视图
      * Convenience method to create and configure wave view
      */
-    static func create(in container: UIView, autoStart: Bool = true) -> SiriWaveView {
+    public static func create(in container: UIView, autoStart: Bool = true) -> SiriWaveView {
         let waveView = SiriWaveView(frame: container.bounds)
         waveView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         container.addSubview(waveView)
@@ -399,7 +400,7 @@ extension SiriWaveView {
      * 检查动画是否正在运行
      * Check if animation is currently running
      */
-    var isRunning: Bool {
+    public var isRunning: Bool {
         return isAnimating
     }
 
@@ -407,7 +408,7 @@ extension SiriWaveView {
      * 获取当前振幅值
      * Get current amplitude value
      */
-    var amplitude: Double {
+    public var amplitude: Double {
         return currentAmplitude
     }
 
@@ -415,7 +416,7 @@ extension SiriWaveView {
      * 获取当前速度值
      * Get current speed value
      */
-    var speed: Double {
+    public var speed: Double {
         return currentSpeed
     }
 }

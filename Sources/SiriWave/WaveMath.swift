@@ -4,7 +4,7 @@ import Foundation
  * 波形数学计算工具类
  * 包含Siri波形动画所需的所有数学函数和常量
  */
-struct WaveMath {
+public struct WaveMath {
 
     // MARK: - 核心常量 / Core Constants
     /// 衰减因子：控制波形边缘的平滑程度，值越大边缘越平滑

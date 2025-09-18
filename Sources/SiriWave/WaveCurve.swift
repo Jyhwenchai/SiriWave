@@ -5,7 +5,7 @@ import UIKit
  * 单个波形曲线类
  * 表示Siri动画中的一个独立波形，包含其参数和生命周期管理
  */
-class WaveCurve {
+public class WaveCurve {
 
     // MARK: - 波形参数 / Wave Parameters
     /// 相位：控制波形在时间轴上的位置，随时间变化产生动画效果
@@ -36,11 +36,11 @@ class WaveCurve {
      * 波形颜色枚举
      * 定义了Siri动画支持的四种颜色类型
      */
-    enum WaveColor {
+    public enum WaveColor {
         case red, green, blue, supportLine
 
         /// 基础UI颜色，匹配JavaScript原版的RGB值
-        var uiColor: UIColor {
+        public var uiColor: UIColor {
             switch self {
             case .red:
                 // 深红色：与原版SiriWave.js保持一致
@@ -61,7 +61,7 @@ class WaveCurve {
          * 动态颜色计算
          * 根据振幅调整颜色的透明度（当前简化实现，直接返回基础颜色）
          */
-        func dynamicColor(amplitude: Double) -> UIColor {
+        public func dynamicColor(amplitude: Double) -> UIColor {
             return uiColor
             // 注释掉的代码：原本用于根据振幅调整透明度
             // 可以根据需要启用动态透明度效果
@@ -74,7 +74,7 @@ class WaveCurve {
      * - index: 曲线在组内的索引
      * - color: 波形颜色类型
      */
-    init(index: Int, color: WaveColor) {
+    public init(index: Int, color: WaveColor) {
         self.curveIndex = index
         self.waveColor = color
         spawn()
@@ -173,7 +173,7 @@ class WaveCurve {
  * 波形曲线管理器
  * 管理三组独立的彩色波形曲线，实现iOS9+风格的多色波形效果
  */
-class WaveCurveManager {
+public class WaveCurveManager {
 
     // MARK: - 曲线组属性 / Curve Group Properties
     /// 红色曲线组：存储所有红色波形曲线
@@ -199,7 +199,7 @@ class WaveCurveManager {
     var globalAmplitude: Double = 1.0
 
     // MARK: - 初始化 / Initialization
-    init() {
+    public init() {
         spawnAllCurves()
     }
 
@@ -261,7 +261,7 @@ class WaveCurveManager {
      * 更新所有曲线组（每帧调用）
      * 分别更新三个颜色组的所有曲线
      */
-    func update() {
+    public func update() {
         // 更新红色曲线组
         for curve in redCurves {
             curve.update(globalSpeed: globalSpeed, totalCurves: numberOfRedCurves)
@@ -316,14 +316,14 @@ class WaveCurveManager {
     /**
      * 设置动画速度（支持插值过渡）
      */
-    func setSpeed(_ speed: Double) {
+    public func setSpeed(_ speed: Double) {
         globalSpeed = speed
     }
 
     /**
      * 设置动画振幅（支持插值过渡）
      */
-    func setAmplitude(_ amplitude: Double) {
+    public func setAmplitude(_ amplitude: Double) {
         globalAmplitude = amplitude
     }
 
