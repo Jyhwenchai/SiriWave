@@ -12,7 +12,8 @@
 5. [渲染优化](#渲染优化)
 6. [性能考虑](#性能考虑)
 7. [使用指南](#使用指南)
-8. [总结](#总结)
+8. [Metal GPU 实现](#metal-gpu-实现)
+9. [总结](#总结)
 
 ## 项目背景与目标
 
@@ -368,6 +369,27 @@ func updateWaveWithVoiceLevel(_ level: Float) {
 - 振幅和速度的平滑变化
 - 避免视觉突变
 - 提供自然的用户体验
+
+## Metal GPU 实现
+
+### 设计动机
+在 Core Graphics 实现中，CPU 需要为每个像素采样计算多条曲线并构建填充路径，主线程负载极高。通过 Metal 将核心波形计算迁移到 GPU，可显著降低 CPU 占用并保持 60fps。
+
+### 关键实现
+- **SiriWaveMetalView**：继承 `MTKView`，内部使用单一 `MTLRenderPipelineState` 以加性混合方式渲染三组波形。
+- **统一采样缓存**：预生成 512 个采样点，作为顶点缓冲复用；顶点着色器根据采样索引计算 `[-graphX, graphX]` 区间的实际坐标。
+- **Shader 端波形计算**：顶点着色器内循环遍历 2~5 条曲线，复现 `WaveMath.calculateCurveY` 与全局衰减函数，最终输出正负两个方向的填充条带。
+- **CPU 任务简化**：CPU 仅负责参数插值、曲线生命周期更新和将曲线参数打包为常量缓冲，避免频繁的路径构建。
+- **加性混合**：通过 `source = 1 / dest = 1` 的混合配置模拟 `.plusLighter` 效果，保持颜色叠加的自然过渡。
+
+### 使用方式
+```swift
+let metalView = SiriWaveMetalView.create(in: containerView, autoStart: true)
+metalView.setAmplitude(1.2)
+metalView.setSpeed(0.25)
+```
+
+切换至 Metal 版本即可在中高端设备上观察到明显的 CPU 使用率下降，尤其在需要长时间运行的语音场景中效果突出。
 
 ## 总结
 

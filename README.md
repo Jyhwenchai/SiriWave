@@ -26,6 +26,22 @@ class ViewController: UIViewController {
 }
 ```
 
+> 性能优化：如果希望将渲染计算转移到 GPU，可使用 `SiriWaveMetalView`。该版本基于 Metal 渲染，能显著降低主线程 CPU 占用。
+
+```swift
+import UIKit
+
+class MetalViewController: UIViewController {
+    private var waveView: SiriWaveMetalView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        waveView = SiriWaveMetalView.create(in: view, autoStart: true)
+    }
+}
+```
+
 ### 基础配置示例
 
 ```swift
@@ -147,6 +163,7 @@ static func create(in container: UIView, autoStart: Bool = true) -> SiriWaveView
 - **WaveMath.swift** - 波形函数计算、全局衰减算法、坐标转换工具
 - **WaveCurve.swift** - 单曲线生命周期、三色曲线组管理、参数随机生成
 - **SiriWaveView.swift** - Core Graphics 绘制、CADisplayLink 动画、参数插值系统
+- **SiriWaveMetalView.swift** - 基于 Metal 的 GPU 渲染实现，提供更低 CPU 占用
 
 ## 系统要求
 

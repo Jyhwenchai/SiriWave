@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D5E371DA2E7C0009009677FC /* SiriWave in Frameworks */ = {isa = PBXBuildFile; productRef = D5E371D92E7C0009009677FC /* SiriWave */; };
+		D577D1732EC41E8400B73B40 /* SiriWave in Frameworks */ = {isa = PBXBuildFile; productRef = D577D1722EC41E8400B73B40 /* SiriWave */; };
+		D5ED73EF2EB8A36C0038F6BF /* SiriWave in Frameworks */ = {isa = PBXBuildFile; productRef = D5ED73EE2EB8A36C0038F6BF /* SiriWave */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5E371DA2E7C0009009677FC /* SiriWave in Frameworks */,
+				D577D1732EC41E8400B73B40 /* SiriWave in Frameworks */,
+				D5ED73EF2EB8A36C0038F6BF /* SiriWave in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +85,8 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				D5E371D92E7C0009009677FC /* SiriWave */,
+				D5ED73EE2EB8A36C0038F6BF /* SiriWave */,
+				D577D1722EC41E8400B73B40 /* SiriWave */,
 			);
 			productName = Example;
 			productReference = D5E371A52E7BFF6F009677FC /* Example.app */;
@@ -114,7 +117,7 @@
 			mainGroup = D5E3719C2E7BFF6F009677FC;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D5E371D82E7C0009009677FC /* XCLocalSwiftPackageReference "../../SiriWave" */,
+				D577D1712EC41E8400B73B40 /* XCLocalSwiftPackageReference "../../SiriWave" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D5E371A62E7BFF6F009677FC /* Products */;
@@ -352,14 +355,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D5E371D82E7C0009009677FC /* XCLocalSwiftPackageReference "../../SiriWave" */ = {
+		D577D1712EC41E8400B73B40 /* XCLocalSwiftPackageReference "../../SiriWave" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../SiriWave;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D5E371D92E7C0009009677FC /* SiriWave */ = {
+		D577D1722EC41E8400B73B40 /* SiriWave */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SiriWave;
+		};
+		D5ED73EE2EB8A36C0038F6BF /* SiriWave */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SiriWave;
 		};
