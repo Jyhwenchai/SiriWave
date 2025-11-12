@@ -8,7 +8,7 @@ import SiriWave
 class SiriWaveViewController: UIViewController {
 
     // MARK: - UI Elements
-    private var waveView: SiriWaveView!
+  private var waveView: SiriWaveMetalView!
     private var containerView: UIView!
     private var controlsStackView: UIStackView!
 
@@ -167,7 +167,7 @@ class SiriWaveViewController: UIViewController {
     }
 
     private func setupWaveView() {
-        waveView = SiriWaveView.create(in: containerView, autoStart: false)
+        waveView = SiriWaveMetalView.create(in: containerView, autoStart: false)
     }
 
     private func setupConstraints() {

@@ -84,7 +84,8 @@ public final class SiriWaveMetalView: MTKView {
         isPaused = true
         enableSetNeedsDisplay = false
         preferredFramesPerSecond = 60
-        clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 1)
+        clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 0)
+        isOpaque = false
 
         delegate = self
 
